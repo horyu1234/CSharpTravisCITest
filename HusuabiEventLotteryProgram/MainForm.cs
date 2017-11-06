@@ -310,11 +310,28 @@ namespace HusuabiEventLotteryProgram
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            disableCheck();
+            //disableCheck();
             new Thread(new ThreadStart(stats)).Start();
+
+            SetProgramIcon();
 
             SetFont(this.treeView1);
             SetFont(this.label2);
+        }
+
+        private void SetProgramIcon()
+        {
+            var assembly = Assembly.GetExecutingAssembly();
+            var programIconStream =
+                assembly.GetManifestResourceStream("HusuabiEventLotteryProgram.HusuabiEventLotteryProgramIcon.ico");
+
+            if (programIconStream == null)
+            {
+                return;
+            }
+
+            var icon = new Icon(programIconStream);
+            this.Icon = icon;
         }
 
         public void disableCheck()
